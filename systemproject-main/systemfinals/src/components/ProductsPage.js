@@ -20,6 +20,7 @@ const ProductsPage = () => {
   const [selectedSize, setSelectedSize] = useState(null); // State for size selection
   const [quantity, setQuantity] = useState(1); // State for quantity
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+  const navigate = useNavigate();
 
   // Fetch products from MongoDB
   useEffect(() => {
@@ -236,7 +237,7 @@ const ProductsPage = () => {
                     name="quantity"
                     min="1"
                     max="2" // limit to 2 if the product has sizes
-                    defaultValue="1"
+                    defaultValue={quantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                     onKeyDown={(e) => e.preventDefault()} // disables typing
                   />
@@ -247,7 +248,8 @@ const ProductsPage = () => {
                     name="quantity"
                     min="1"
                     max={Math.min(selectedProduct.stock, 5)} // ITO BAGO TO max at 5, but consider stock limit
-                    defaultValue="1"
+                    defaultValue={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                     onKeyDown={(e) => e.preventDefault()} // disables typing
                   />
                 )}

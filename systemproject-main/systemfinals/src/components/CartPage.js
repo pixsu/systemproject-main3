@@ -60,8 +60,7 @@ const CartPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const totalItems = () => quantities.reduce((sum, quantity) => sum + quantity, 0);
-  // check if total quantity exceeds the limit
-  const isLimitReached = () => totalItems() >= 5;
+
 
   const increaseQuantity = (index) => {
     setQuantities(prevQuantities => {
@@ -373,11 +372,10 @@ const CartPage = () => {
               <DatePicker
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
-                filterDate={isDateValid}
-                placeholderText="Select pickup date"
-                dateFormat="MMMM d, yyyy"
                 minDate={minDate}
                 maxDate={maxDate}
+                filterDate={isDateValid}
+                placeholderText="Select pickup date"
                 className="react-datepicker__input"
                 required
               />
