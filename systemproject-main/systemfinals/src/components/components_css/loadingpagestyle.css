@@ -1,0 +1,115 @@
+.loading-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+  
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; 
+}
+
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 200px;
+  z-index: 10;
+}
+
+.button-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 2px solid white; 
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  border-radius: 30px; 
+}
+
+.btn:first-child {
+  background-color: transparent;
+  color: white; 
+}
+
+.btn:last-child {
+  background-color: white;
+  color: black; 
+  border-radius: 30px;
+}
+
+.btn:hover {
+  opacity: 0.8; 
+}
+
+.btn {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.center-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1500px;
+  z-index: 10;
+  animation: fadeInCenter 1s ease forwards; 
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInCenter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.des {
+  margin-top: 850px;
+  font-size: 20px;
+  color: white;
+  z-index: 10;
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  animation: fadeInDelay 1s ease forwards;
+  animation-delay: 0.75s;
+}
+
+.des strong {
+  font-weight: 600;
+}
+
+@keyframes fadeInDelay {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

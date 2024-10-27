@@ -1,0 +1,422 @@
+/* -------------------- CART TOP SECTION -------------------- */
+.carttop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center center;
+  background-image: url('../../imgs/prodbg.png');
+  height: 25vh;
+  padding-top: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.carttop h1 {
+  font-size: 50px;
+  font-weight: 600;
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.carttop p {
+  width: 1000px;
+  font-weight: 500;
+  font-size: 20px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* -------------------- ORDER SUMMARY -------------------- */
+.ordersummary {
+  width: 500px;
+  height: fit-content;
+  padding: 30px 40px 60px 40px;
+  margin: 100px 30px 30px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 0.1px solid #e6e6e6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  animation: slideIn 0.5s ease-in;
+}
+
+.cart-page {
+  margin: 0px 40px 50px 40px;
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+}
+
+.ordersummary h1 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: #2e2b80;
+  margin-bottom: 30px;
+}
+
+.ordersummary h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.ordersummary p {
+  font-size: 20px;
+  margin-bottom: 12px;
+  line-height: 30px;
+}
+
+.ordersummary hr {
+  margin: 30px 0px 30px 0px;
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0px 0px 0px;
+}
+
+.total-price p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2e2b80;
+}
+
+/* MAY BINAGO DITO */
+.ordersummary .checkoutbutton {
+  width: 100%;
+  padding: 10px;
+  background-color: #f6d130;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 30px 0px 0px 0px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px #fed41e, 0 8px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.ordersummary .checkoutbutton:hover {
+  box-shadow: 0 2px #fed41e, 0 6px 10px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-2px); 
+}
+
+.ordersummary .checkoutbutton:active {
+  box-shadow: 0 1px #fed41e; 
+  transform: translateY(1px);
+}
+
+.ordersummary .checkoutbutton:hover {
+  background-color: #fed41e;
+}
+/* MAY BINAGO DITO */
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 15px
+}
+
+.summary-item p {
+  margin: 0;
+}
+
+.userinfovalue {
+  font-weight: 600;
+  color: #696969;
+}
+
+/* -------------------- INDIVIDUAL PRODUCTS -------------------- */
+.productsadded {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  margin-right: 20px;
+}
+
+.productsaddedheader {
+  margin: 10px 0px 0px 110px;
+  justify-content: space-between;
+  display: flex;
+  width: 810px;
+}
+
+.productsaddedheader p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+}
+
+.productsaddedheader p:nth-child(1) {
+  margin-right: 40px;
+}
+
+.productsaddedheader p:nth-child(3) {
+  margin-right: 10px;
+}
+
+.productsaddedheader p:last-child {
+  margin-right: 0;
+}
+
+.individualproducts {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 5px 50px; 
+  background-color: #fff;
+  border: 0.1px solid #e6e6e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px; 
+  width: 1070px;
+  animation: slideIn 0.5s ease-in;
+}
+
+.individualproducts img {
+  width: 50px; 
+  height: auto; 
+  margin-right: 10px; 
+  transition: transform 0.3s ease;
+}
+
+.individualproducts:hover img {
+  transform: scale(1.1);
+}
+
+.individualproducts p {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  margin: 0;
+}
+
+.productimagename p {
+  max-width: 150px;
+  font-size: 15px !important;
+  text-align: center;
+}
+
+.quantity-control {
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+.quantity-control button {
+  background-color: #f0f0f0; 
+  border: 1px solid #ccc; 
+  border-radius: 30px; 
+  padding: 5px 10px; 
+  cursor: pointer; 
+  font-size: 12px; 
+  color: #333; 
+  transition: background-color 0.3s, transform 0.1s; 
+}
+
+.quantity-control button:hover {
+  background-color: #e0e0e0; 
+}
+
+.quantity-control button:active {
+  transform: scale(0.95); 
+}
+
+.delete-button {
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  color: black; 
+  font-size: 20px; 
+  margin-left: 10px; 
+}
+
+.productimagename {
+  padding: 20px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 5px; 
+}
+
+.productsadded p {
+  font-weight: 400;
+  font-size: 18px;
+  color: black;
+}
+
+.productsaddedheader p {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+}
+
+.productimagename img {
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover; 
+}
+
+/* -------------------- EMPTY CART -------------------- */
+.empty-cart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
+}
+
+.empty-cart {
+  text-align: center;
+  margin: 0 auto;
+  width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s 3;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.empty-cart h2 {
+  font-size: 2em;
+  color: #555;
+}
+
+.empty-cart p {
+  font-size: 1.2em;
+  color: #777;
+  margin: 10px 0;
+}
+
+.browse-button {
+  background-color: #3d3b92;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+
+.browse-button:hover {
+  background-color: #2e2b80;
+}
+
+@media screen and (max-width: 768px) {
+  .empty-cart {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* -------------------- DATE PICKER -------------------- */ 
+.react-datepicker-wrapper {
+  width: 300px;
+  margin-right: 20px;
+}
+
+.react-datepicker__input-container {
+  display: flex;
+}
+
+.react-datepicker__input {
+  width: 100%;
+  height: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  text-align: right;
+  font-weight: 600;
+  color: #696969;
+  font-size: 18px;
+}
+
+.react-datepicker__input:focus {
+  border-color: #fed41e;
+}
+
+.react-datepicker {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.react-datepicker__day {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.react-datepicker__day--disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.react-datepicker__day:not(.react-datepicker__day--disabled):hover {
+  background-color: #f0f8f7;
+  color: #fed41e;
+}
+
+.react-datepicker__day--selected {
+  background-color: #fed41e;
+  color: white;
+}
+
+.date-slot-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.date-slot-tooltip .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; 
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.date-slot-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* -------------------- NOTE -------------------- */ 
+.cnote {
+  margin-top: 15px;
+  font-size: 12px;
+  font-style: italic;
+  text-align: left;
+}

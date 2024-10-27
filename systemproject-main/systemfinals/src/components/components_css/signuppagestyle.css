@@ -1,0 +1,147 @@
+.bgsec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../../imgs/lgsubg.png');
+    height: 100vh; 
+    font-family: Arial, sans-serif; 
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 170px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.signup-logo {
+    width: 200px; 
+    margin: 0 auto; 
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #000;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.name-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; 
+}
+
+.name-input-group {
+    width: 48%;
+    position: relative; 
+}
+
+.name-input-group input {
+    width: 100%; 
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.email-input-group,
+.password-input-group,
+.confirmpassword-input-group,
+.course-input-group {
+    position: relative;
+    margin-bottom: 20px; 
+}
+
+.email-input-group i,
+.confirmpassword-input-group i,
+.password-input-group i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.email-input-group input,
+.password-input-group input,
+.confirmpassword-input-group input,
+.course-input-group select {
+    width: 100%; 
+    padding: 10px 40px; 
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.course-input-group select {
+    padding: 10px; 
+}
+
+.email-input-group input:focus,
+.password-input-group input:focus,
+.confirmpassword-input-group input:focus,
+.course-input-group select:focus {
+    border-color: #333;
+}
+
+.password-input-group i:last-child,
+.confirmpassword-input-group i:last-child {
+    position: absolute;
+    right: -350px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.signup-btn {
+    width: 100%;
+    background-color: #f6d130;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease; 
+}
+
+.signup-btn:hover {
+    background-color: #f2cc22;
+    transform: scale(1.05); 
+
+}
+
+.login-link {
+    font-size: 14px;
+    color: #666;
+}
+
+.login-link a {
+    color: #3d3b92;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

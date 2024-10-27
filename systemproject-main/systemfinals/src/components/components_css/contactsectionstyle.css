@@ -1,0 +1,122 @@
+#contactsection {
+    background-color: #2a326e;
+    text-align: center;
+    padding: 40px 0;
+    color: white;
+}
+
+#contactsection img {
+    max-width: 180px;
+}
+
+#contactsection h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+#contactsection p {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 35px;
+    font-weight: 500;
+}
+
+.contactbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+    color: black;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    max-width: 1600px;
+    text-align: left;
+    height: 165px;
+}
+
+.content1 {
+    flex: 1.8;
+    padding: 0 15px;
+}
+
+.content2, .content3 {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.content1 h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px !important;
+    margin-bottom: 8px;
+    color: #2a326e;
+}
+
+.contactbox .content1 p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #2a326e !important;
+    width: 700px;
+}
+
+.content2 h2, .content3 h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: left;
+    color: #2a326e !important;
+}
+
+.content2 ul {
+    padding-left: 0;
+}
+
+.content2 li, .content2 a {
+    list-style: none;
+    text-decoration: none;
+    font-size: 16px;
+    color: #2a326e;
+    font-weight: 500;
+}
+
+.content2 li {
+    margin-bottom: 5px;
+}
+
+.content3 a {
+    display: block;
+    font-size: 16px;
+    color: #2a326e;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.content3 a i {
+    margin-right: 6px;
+    color: #4267B2;
+}
+
+@media screen and (max-width: 768px) {
+    .contactbox {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .content1, .content2, .content3 {
+        text-align: center;
+        padding: 5px 0;
+    }
+
+    .content1 img {
+        margin-bottom: 15px;
+    }
+
+    .content1, .content2, .content3 {
+        padding: 5px;
+    }
+}

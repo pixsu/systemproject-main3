@@ -1,0 +1,75 @@
+.nubetext {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.nubetext h1 {
+    color: #d2b226;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.nubetext p {
+    max-width: 1200px;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slide {
+    width: 1000px;
+    height: 500px;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background-color: #717171;
+}
