@@ -20,7 +20,6 @@ const ProductsPage = () => {
   const [selectedSize, setSelectedSize] = useState(null); // State for size selection
   const [quantity, setQuantity] = useState(1); // State for quantity
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-  const navigate = useNavigate();
 
   // Fetch products from MongoDB
   useEffect(() => {
