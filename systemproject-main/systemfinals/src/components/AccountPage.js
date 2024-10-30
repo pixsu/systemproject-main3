@@ -94,8 +94,8 @@ const AccountPage = () => {
 
         if (selectedFile) {
             const formData = new FormData();
-            formData.append('profilePic', selectedFile); // Add the selected file
-            formData.append('userId', userId); // Send the user ID
+            formData.append('profilePic', selectedFile); // add the selected file
+            formData.append('userId', userId); // send the user ID
 
             try {
                 const response = await fetch('http://localhost:5000/api/uploadProfilePic', {
