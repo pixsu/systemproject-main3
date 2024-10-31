@@ -8,6 +8,7 @@ const feedbackRoutes = require('./routes/feedbackRoutes');
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes'); 
 const productRoutes = require('./routes/productRoutes');
+const pickupScheduleRoutes = require('./routes/pickupScheduleRoutes');
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,8 @@ app.use('/api/feedback', feedbackRoutes);
 app.use('/api', profileRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use('/api/products', productRoutes);
+app.use('/api/pickupSchedule', pickupScheduleRoutes);
+app.use('/api/pickup-schedule', pickupScheduleRoutes);
 
 
 

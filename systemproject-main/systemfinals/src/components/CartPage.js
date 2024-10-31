@@ -5,6 +5,7 @@ import { jsPDF } from 'jspdf';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addDays, isSunday, format, min, max } from 'date-fns';
+import axios from 'axios';
 
 import NavBar from './NavBar';
 import ContactSection from './ContactSection';
@@ -17,9 +18,33 @@ import ordersummlogo from '../imgs/websitelogo2.png';
 
 const CartPage = () => {
   const [quantities, setQuantities] = useState([]);
+  const [availableDates, setAvailableDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const fetchAvailableDates = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/pickupSchedule/available-dates');
+
+        // Log the response to check the data format
+        console.log("Fetched dates from server:", response.data);
+
+        // Map and parse the date field from the response
+        setAvailableDates(response.data.map(item => new Date(item.date)));
+      } catch (error) {
+        console.error('Error fetching available dates:', error);
+      }
+    };
+
+    fetchAvailableDates();
+  }, []);
+
+  // Filter function to determine if a date is available
+  const isDateAvailable = (date) => {
+    return availableDates.some(availableDate => availableDate.toDateString() === date.toDateString());
+  };
 
   useEffect(() => {
     // Fetch user details on component load
@@ -44,16 +69,11 @@ const CartPage = () => {
     fetchUserDetails();
   }, []);
 
-  const [availableDate, setAvailableDate] = useState([
-    { id: '1', date: 'October 28, 2024', slots: 25 },
-    { id: '2', date: 'October 29, 2024', slots: 0 },
-    { id: '3', date: 'October 30, 2024', slots: 25 },
-    { id: '4', date: 'October 31, 2024', slots: 25 },
-    { id: '5', date: 'November 1, 2024', slots: 25 },
-  ]);
+
+
 
   // BAGO TO set kung anong month yung lalabas sa date picker
-  const availablePickupDates = availableDate.map(({ date }) => new Date(date));
+  const availablePickupDates = availableDates.map(({ date }) => new Date(date));
   const minDate = min(availablePickupDates);
   const maxDate = max(availablePickupDates);
 
@@ -124,18 +144,47 @@ const CartPage = () => {
   };
 
   // BAGO TOOOOOOOOO function to adjust slot availability
-  const adjustSlotAvailability = () => {
+  const adjustSlotAvailability = async () => {
     if (!selectedDate) return;
 
-    setAvailableDate((prevAvailableDates) =>
-      prevAvailableDates.map((date) => {
-        if (date.date === format(selectedDate, 'MMMM d, yyyy') && date.slots > 0) {
-          return { ...date, slots: date.slots - 1 };
-        }
-        return date;
-      })
-    );
+    try {
+      const response = await fetch(`http://localhost:5000/api/pickup-schedule/update-slots`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ date: format(selectedDate, 'yyyy-MM-dd') }),
+      });
+
+      const data = await response.json(); // Parse the JSON response
+      console.log("Response from server:", data); // Log the response data
+
+      if (data.message === "Slot updated successfully") {
+        // Handle the successful response
+        console.log("Success message:", data.message);
+        setAvailableDates((prevAvailableDates) =>
+          prevAvailableDates.map((date) => {
+            if (date.date === format(selectedDate, 'MMMM d, yyyy') && date.slots > 0) {
+              return { ...date, slots: date.slots - 1 };
+            }
+            return date;
+          })
+        );
+        return true; // Indicate success
+      } else {
+        console.error("Failed to adjust slots on the server:", data);
+        alert(data.message || "Failed to adjust slots. Please try again.");
+        return false;
+      }
+    } catch (error) {
+      console.error("Error adjusting slot availability:", error);
+      alert("An error occurred while adjusting slot availability.");
+      return false;
+    }
   };
+
+
+
 
   // generate pdf function
   const generatePDF = (orderId) => {
@@ -265,17 +314,25 @@ const CartPage = () => {
     };
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     const userId = localStorage.getItem('userId');
+
     if (userId) {
       localStorage.setItem(`cart_${userId}`, JSON.stringify([])); // Clear the cart in localStorage
     }
 
     generatePDF();
-    adjustSlotAvailability();
-    setIsModalOpen(false);
-    setQuantities([]);
-    setCartItems([]);
+
+    // Adjust slot availability for the selected date
+    const success = await adjustSlotAvailability(selectedDate); // Pass selected date
+
+    if (success) {
+      setIsModalOpen(false);
+      setQuantities([]);
+      setCartItems([]);
+    } else {
+      alert("Failed to update slot availability. Please try again.");
+    }
   };
 
 
@@ -290,7 +347,7 @@ const CartPage = () => {
       date >= today &&
       date <= maxDate &&
       !isSunday(date) &&
-      availableDate.some((d) => d.date === formattedDate && d.slots > 0)
+      availableDates.some((d) => d.date === formattedDate && d.slots > 0)
     );
   };
 
@@ -372,9 +429,10 @@ const CartPage = () => {
               <DatePicker
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
-                minDate={minDate}
-                maxDate={maxDate}
-                filterDate={isDateValid}
+                dateFormat="MMMM d, yyyy"
+                //minDate={minDate}
+                //maxDate={maxDate}
+                filterDate={isDateAvailable}
                 placeholderText="Select pickup date"
                 className="react-datepicker__input"
                 required
