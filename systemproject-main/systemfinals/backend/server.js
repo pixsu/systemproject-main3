@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const User = require('./models/User');
-const path = require('path');
+const path = require('path'); 
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes'); 
 const productRoutes = require('./routes/productRoutes');
+const pickupScheduleRoutes = require('./routes/pickupScheduleRoutes');
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,10 @@ app.use('/api/feedback', feedbackRoutes);
 app.use('/api', profileRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use('/api/products', productRoutes);
+app.use('/api/pickupSchedule', pickupScheduleRoutes);
+app.use('/api/pickup-schedule', pickupScheduleRoutes);
+
+
 
 const MONGODB_URI = process.env.MONGODB_URI;
 

@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const User = require('../models/User');
 
-// Multer setup for file upload
+// multer setup for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Route to handle profile picture update
+// route to handle profile picture update
 router.post('/uploadProfilePic', upload.single('profilePic'), async (req, res) => {
   const userId = req.body.userId;
   const profilePicPath = req.file.path;
@@ -26,7 +26,7 @@ router.post('/uploadProfilePic', upload.single('profilePic'), async (req, res) =
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.profilePic = profilePicPath; // Save image path in the database
+    user.profilePic = profilePicPath; // save image path in the database
     await user.save();
     res.status(200).json({ message: 'Profile picture updated successfully', profilePic: profilePicPath });
   } catch (error) {

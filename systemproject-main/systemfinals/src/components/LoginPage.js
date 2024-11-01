@@ -56,13 +56,16 @@ const LoginPage = () => {
         console.log('User logged in and ID saved to localStorage:', data.userId);
         clearCart(); // Clear previous user's cart items
         completeLogin();
+        setLoading(true);
       } else {
         console.error('Login failed:', data.error);
         alert('Login failed. Please check your credentials.');
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error during login:', error);
       alert('Login failed. Please try again.');
+      setLoading(false);
     }
   };
 
