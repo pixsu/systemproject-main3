@@ -12,4 +12,5 @@ const pickupScheduleSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('PickupSchedule', pickupScheduleSchema);
+const PickupSchedule = mongoose.model('PickupSchedule', pickupScheduleSchema);
+module.exports = PickupSchedule;
