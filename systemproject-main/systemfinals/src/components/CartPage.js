@@ -355,9 +355,9 @@ const CartPage = () => {
     console.log("Cart items before checkout:", cartItems); // Log cart items
 
     // Prepare data for the order
-    const orderItems = cartItems.map(item => ({
+    const orderItems = cartItems.map((item, index) => ({
       productId: item._id,
-      quantity: item.quantity
+      quantity: quantities[index] // use the latest quantity from the state
     }));
 
     // Check for undefined productIds
@@ -369,7 +369,11 @@ const CartPage = () => {
       return;
     }
 
-    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    // const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalPrice = cartItems.reduce((sum, item, index) => {
+      return sum + item.price * quantities[index]; // use latest quantity
+    }, 0);
+
     const datePlaced = Date().toString(); // Set the order date
 
     // Log the data being sent to the backend

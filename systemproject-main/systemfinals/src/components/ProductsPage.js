@@ -147,7 +147,7 @@ const ProductsPage = () => {
       <section>
         <div className="notice-section">
           <p>
-            Please note: Students can only avail up to 2 uniforms per student and a maximum of 5 items per transaction.
+            
           </p>
         </div>
       </section>
