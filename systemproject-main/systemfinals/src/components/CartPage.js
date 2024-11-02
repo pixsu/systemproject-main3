@@ -22,7 +22,7 @@ const CartPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [user, setUser] = useState(null)
-  
+
 
   useEffect(() => {
     const fetchAvailableDates = async () => {
@@ -397,22 +397,12 @@ const CartPage = () => {
       if (response.status === 201) {
         console.log("Order placed successfully:", response.data.orderId);
         generatePDF(response.data.orderId); // Pass the orderId to include in the PDF
-        const dateObject = new Date(selectedDate.date); // Make sure this is a valid date
-        if (isNaN(dateObject.getDate())) {
-          console.error("Invalid Date Object created:", dateObject);
-          alert("The selected date is invalid.");
-          return;
-        }
-        const success = await adjustSlotAvailability(dateObject); // Adjust slots based on selected date
 
-        if (success) {
-          setIsModalOpen(false);
-          setQuantities([]);
-          setCartItems([]);
-          localStorage.setItem(`cart_${userId}`, JSON.stringify([])); // Clear the cart in localStorage for the user
-        } else {
-          alert("Failed to update slot availability. Please try again.");
-        }
+        // Update UI state after successful checkout
+        setIsModalOpen(false);
+        setQuantities([]);
+        setCartItems([]);
+        localStorage.setItem(`cart_${userId}`, JSON.stringify([])); // Clear the cart in localStorage for the user
       } else {
         alert("Failed to place order. Please try again.");
       }
