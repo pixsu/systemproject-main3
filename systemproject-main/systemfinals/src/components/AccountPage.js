@@ -20,7 +20,7 @@ const AccountPage = () => {
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [user, setUser] = useState(null); // State to store fetched user details
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     useEffect(() => {
         // Fetch user details on component load
@@ -69,6 +69,20 @@ const AccountPage = () => {
 
     const handleCancelLogout = () => {
         setIsModalOpen(false);
+    };
+
+    // delete account
+    const handleDeleteAccountClick = () => {
+        setIsDeleteModalOpen(true);
+    };
+
+    const handleConfirmDeleteAccount = () => {
+        setIsDeleteModalOpen(false);
+        navigate('/login');
+    };
+
+    const handleCancelDeleteAccount = () => {
+        setIsDeleteModalOpen(false);
     };
 
     const handleEditClick = () => {
@@ -228,7 +242,10 @@ const AccountPage = () => {
                             </div>
                         </div>
 
-                        <button className="logout" onClick={handleLogoutClick}>Logout</button>
+                        <div className="accbutton-container">
+                            <button className="logout" onClick={handleLogoutClick}>Logout</button>
+                            <button className="delacc" onClick={handleDeleteAccountClick}>Delete Account</button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -240,11 +257,19 @@ const AccountPage = () => {
                 />
             )}
 
-            {/* confirmation Modal for Logout */}
+            {/* Confirmation Modal for Logout */}
             <ConfirmationModal
                 isOpen={isModalOpen}
                 onClose={handleCancelLogout}
                 onConfirm={handleConfirmLogout}
+            />
+
+            {/* Confirmation Modal for Delete Account */}
+            <ConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={handleCancelDeleteAccount}
+                onConfirm={handleConfirmDeleteAccount}
+                message="Are you sure you want to delete your account?"
             />
 
             <ContactSection setSelectedCategory={setSelectedCategory} />
