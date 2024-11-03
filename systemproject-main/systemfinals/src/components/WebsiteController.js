@@ -12,15 +12,15 @@ import ScrollToTop from './ScrollToTop';
 const WebsiteController = () => {
   return (
     <Router>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
-        <Route path="/" element={<LoadingPage />} /> 
-        <Route path="/login" element={<LoginPage />} /> 
-        <Route path="/signup" element={<SignUpPage />} /> 
-        <Route path="/home" element={<HomePage />} /> 
-        <Route path="/products" element={<ProductsPage />} /> 
-        <Route path="/account" element={<AccountPage />} /> 
-        <Route path="/cart" element={<Cart />} /> 
+        <Route path="/" element={<LoadingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/account" element={<AccountPage />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );

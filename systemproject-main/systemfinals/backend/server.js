@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const User = require('./models/User');
-const path = require('path'); 
+const path = require('path');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const authRoutes = require('./routes/authRoutes');
-const profileRoutes = require('./routes/profileRoutes'); 
+const profileRoutes = require('./routes/profileRoutes');
 const productRoutes = require('./routes/productRoutes');
 const pickupScheduleRoutes = require('./routes/pickupScheduleRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -14,13 +14,9 @@ const orderRoutes = require('./routes/orderRoutes');
 dotenv.config();
 const app = express();
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
-
-
-
 app.use(cors()); // Allow React frontend to connect
 app.use(express.json()); // Parse JSON data
-app.use('/api/auth', authRoutes);  // Use the auth routes
+app.use('/api/auth', authRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api', profileRoutes);
 app.use('/uploads', express.static('uploads'));
@@ -28,18 +24,15 @@ app.use('/api/products', productRoutes);
 app.use('/api/pickupSchedule', pickupScheduleRoutes);
 app.use('/api/pickup-schedule', pickupScheduleRoutes);
 app.use('/api/orders', orderRoutes);
-
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 const MONGODB_URI = process.env.MONGODB_URI;
-
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => console.error('MongoDB connection error:', err));
-
 
 // Route to fetch user details by userId
 app.get('/api/:userId', async (req, res) => {
@@ -82,8 +75,6 @@ app.post('/api/auth/signup', async (req, res) => {
 app.get('/', (req, res) => {
     res.send('Backend is running!');
 });
-
-
 
 // Server listen
 const PORT = process.env.PORT || 5000;

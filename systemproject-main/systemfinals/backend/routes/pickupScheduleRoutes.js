@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const PickupSchedule = require('../models/pickupSchedule'); // Adjust path as necessary
 
-// Endpoint to fetch dates with available slots
+// to fetch dates with available slots
 router.get('/available-dates', async (req, res) => {
     try {
         console.log('Fetching available dates from MongoDB...');
-      const availableDates = await PickupSchedule.find({ slots: { $gt: 0 } }, 'date slots');
-      console.log('Available dates fetched:', availableDates);
-      res.json(availableDates);
+        const availableDates = await PickupSchedule.find({ slots: { $gt: 0 } }, 'date slots');
+        console.log('Available dates fetched:', availableDates);
+        res.json(availableDates);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching available dates', error });
+        res.status(500).json({ message: 'Error fetching available dates', error });
     }
-  });
+});
 
 router.post('/deduct-slots', async (req, res) => {
     const { date } = req.body;
@@ -35,8 +35,8 @@ router.post('/deduct-slots', async (req, res) => {
 });
 
 router.post('/update-slots', async (req, res) => {
-    
-    const { date } = req.body; // Ensure you're receiving the date from req.body
+
+    const { date } = req.body;
     console.log("Received date for slot update:", date);
     try {
         const result = await PickupSchedule.findOneAndUpdate(

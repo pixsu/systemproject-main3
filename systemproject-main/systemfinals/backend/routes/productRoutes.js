@@ -6,7 +6,7 @@ const Product = require('../models/Product');
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find({});
-    console.log('Fetched Products:', products); // Check the products here
+    console.log('Fetched Products:', products);
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });

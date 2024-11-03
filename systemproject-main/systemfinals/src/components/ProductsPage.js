@@ -17,8 +17,8 @@ const ProductsPage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [totalItemsInCart, setTotalItemsInCart] = useState(0);
   const [uniformCount, setUniformCount] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(null); // State for size selection
-  const [quantity, setQuantity] = useState(1); // State for quantity
+  const [selectedSize, setSelectedSize] = useState(null); 
+  const [quantity, setQuantity] = useState(1); 
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
   const navigate = useNavigate();
 

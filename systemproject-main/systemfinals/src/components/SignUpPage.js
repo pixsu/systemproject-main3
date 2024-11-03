@@ -70,16 +70,11 @@ const SignUpPage = () => {
       });
 
       if (response.status === 201) {
-        // alert("Signup successful! Redirecting to login...");
         navigate('/login');
       } else {
-        //  const errorMessage = response.data?.message || "Signup failed. Please try again.";
-        // alert(`Error: ${errorMessage}`);
       }
     } catch (error) {
       console.error("Error during signup:", error);
-      //  const errorMessage = error.response?.data?.message || "Network error. Please try again.";
-      // alert(`Error: ${errorMessage}`);
     } finally {
       completeSignup();
     }

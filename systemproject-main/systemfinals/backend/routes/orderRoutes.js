@@ -1,23 +1,21 @@
 const express = require('express');
 const Order = require('../models/Order');
-const Product = require('../models/Product'); // Import the Product model to update stocks
+const Product = require('../models/Product');
 const router = express.Router();
 const mongoose = require('mongoose');
 const PickupSchedule = require('../models/pickupSchedule');
 
 router.post('/checkout', async (req, res) => {
     try {
-        // Log the incoming request body for debugging
+
         console.log("Request body:", req.body);
 
         const { userId, productIds, pickupScheduleId, quantities, totalPrice } = req.body;
 
-        // Validate the incoming data
         if (!userId || !productIds || !pickupScheduleId || !quantities || !totalPrice) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
 
-        // Log validated fields
         console.log("Validated fields:", { userId, productIds, pickupScheduleId, quantities, totalPrice });
 
         // Create new ObjectId instances properly
@@ -30,7 +28,6 @@ router.post('/checkout', async (req, res) => {
             datePlaced: new Date(), // Set the order date explicitly if needed
         };
 
-        // Create a new order
         const newOrder = new Order(orderData);
         const savedOrder = await newOrder.save();
 
@@ -62,7 +59,6 @@ router.post('/checkout', async (req, res) => {
             throw new Error(`Pickup schedule not found: ${pickupScheduleId}`);
         }
 
-        // Respond with the order ID
         res.status(201).json({ message: 'Order placed successfully', orderId: savedOrder._id });
     } catch (error) {
         console.error("Error creating order:", error);

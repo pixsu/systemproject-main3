@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './components_css/sizepopupchartstyle.css'; 
+import './components_css/sizepopupchartstyle.css';
 
 const SizePopUpChart = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(true);

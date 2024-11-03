@@ -24,22 +24,22 @@ const Slideshow = () => {
 
     return (
         <div className='nubetext'>
-          <h1>NU MOA Bulldogs Exchange</h1>
-          <p>The NU MOA Bulldogs Exchange is your one-stop shop for official National University merchandise. We celebrate the spirit and pride of the Bulldogs community. Whether you're a student, alumni, or fan, our collection helps you wear your loyalty with pride!</p>
-          <div className="slideshow-container">
-            <button className="prev" onClick={prevSlide}>❮</button>
-            <img src={slides[currentSlide]} alt={`Slide ${currentSlide + 1}`} className="slide" />
-            <button className="next" onClick={nextSlide}>❯</button>
-            <div className="dots">
-                {slides.map((_, index) => (
-                    <span 
-                        key={index} 
-                        className={`dot ${index === currentSlide ? 'active' : ''}`} 
-                        onClick={() => setCurrentSlide(index)}
-                    ></span>
-                ))}
+            <h1>NU MOA Bulldogs Exchange</h1>
+            <p>The NU MOA Bulldogs Exchange is your one-stop shop for official National University merchandise. We celebrate the spirit and pride of the Bulldogs community. Whether you're a student, alumni, or fan, our collection helps you wear your loyalty with pride!</p>
+            <div className="slideshow-container">
+                <button className="prev" onClick={prevSlide}>❮</button>
+                <img src={slides[currentSlide]} alt={`Slide ${currentSlide + 1}`} className="slide" />
+                <button className="next" onClick={nextSlide}>❯</button>
+                <div className="dots">
+                    {slides.map((_, index) => (
+                        <span
+                            key={index}
+                            className={`dot ${index === currentSlide ? 'active' : ''}`}
+                            onClick={() => setCurrentSlide(index)}
+                        ></span>
+                    ))}
+                </div>
             </div>
-        </div>
         </div>
     );
 };

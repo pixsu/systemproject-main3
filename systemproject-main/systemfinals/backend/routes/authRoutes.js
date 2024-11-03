@@ -2,13 +2,12 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const User = require('../models/User'); // Ensure the path is correct
+const User = require('../models/User');
 
 // Signup Route
 router.post('/signup', async (req, res) => {
   const { firstName, lastName, email, password, course } = req.body;
 
-  // Check if all fields are filled
   if (!firstName || !lastName || !email || !password || !course) {
     return res.status(400).json({ error: 'Please fill in all fields.' });
   }
@@ -82,7 +81,6 @@ router.post('/change-password', async (req, res) => {
       return res.status(400).json({ error: 'Incorrect current password' });
     }
 
-    // Hash new password
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
     // Update user's password in the database
@@ -101,19 +99,18 @@ router.delete('/deleteAccount/:userId', async (req, res) => {
   const { userId } = req.params;
 
   try {
-      // Find and delete the user by their ID
-      const result = await User.findByIdAndDelete(userId);
+    // Find and delete the user by their ID
+    const result = await User.findByIdAndDelete(userId);
 
-      if (!result) {
-          return res.status(404).json({ message: 'User not found' });
-      }
+    if (!result) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
-      res.status(200).json({ message: 'Account successfully deleted' });
+    res.status(200).json({ message: 'Account successfully deleted' });
   } catch (error) {
-      console.error('Error deleting account:', error);
-      res.status(500).json({ message: 'An error occurred while deleting the account' });
+    console.error('Error deleting account:', error);
+    res.status(500).json({ message: 'An error occurred while deleting the account' });
   }
 });
-
 
 module.exports = router;

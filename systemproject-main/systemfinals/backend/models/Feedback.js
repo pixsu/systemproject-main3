@@ -7,6 +7,4 @@ const feedbackSchema = new mongoose.Schema({
   dateAndTime: { type: Date, default: Date.now },
 });
 
-
-// feedbackId: { type: mongoose.Schema.Types.ObjectId, auto: true },
 module.exports = mongoose.model('Feedback', feedbackSchema);
