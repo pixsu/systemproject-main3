@@ -96,4 +96,24 @@ router.post('/change-password', async (req, res) => {
   }
 });
 
+// Delete account route
+router.delete('/deleteAccount/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+      // Find and delete the user by their ID
+      const result = await User.findByIdAndDelete(userId);
+
+      if (!result) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ message: 'Account successfully deleted' });
+  } catch (error) {
+      console.error('Error deleting account:', error);
+      res.status(500).json({ message: 'An error occurred while deleting the account' });
+  }
+});
+
+
 module.exports = router;

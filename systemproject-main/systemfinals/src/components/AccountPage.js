@@ -76,9 +76,32 @@ const AccountPage = () => {
         setIsDeleteModalOpen(true);
     };
 
-    const handleConfirmDeleteAccount = () => {
-        setIsDeleteModalOpen(false);
-        navigate('/login');
+    const handleConfirmDeleteAccount = async () => {
+        const userId = localStorage.getItem('userId'); // Get the current user ID
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/auth/deleteAccount/${userId}`, {
+                method: 'DELETE',
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Successfully deleted, log the user out and navigate to login
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userDetails');
+                alert(data.message); // Show a success message
+                navigate('/login');
+            } else {
+                console.error('Failed to delete account:', data.message);
+                alert('Failed to delete account');
+            }
+        } catch (error) {
+            console.error('Error deleting account:', error);
+            alert('Something went wrong, please try again.');
+        }
+
+        setIsDeleteModalOpen(false); // Close the modal
     };
 
     const handleCancelDeleteAccount = () => {
