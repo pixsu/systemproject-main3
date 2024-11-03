@@ -163,7 +163,11 @@ const HomePage = () => {
 
         <div className="product-list">
           {products.map((product) => (
-            <div className="product-card" key={product.id}>
+            <div 
+              className="product-card" 
+              key={product.id} 
+              onClick={() => setSelectedCategory(product.category)}
+            >
               <div className="product-image">
                 <img src={product.image} alt={product.name} />
               </div>
