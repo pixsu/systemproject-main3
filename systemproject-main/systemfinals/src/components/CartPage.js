@@ -274,7 +274,11 @@ const CartPage = () => {
       doc.setFontSize(10);
       cartItems.forEach((product, index) => {
         const productYPosition = currentYPosition + index * (lineSpacing - 2);
-        doc.text(`${index + 1}. ${product.name}. (${product.selectedSize})`, margin, productYPosition);
+
+        // only include the size if it exists
+        const sizeText = product.selectedSize ? ` (${product.selectedSize})` : '';
+
+        doc.text(`${index + 1}. ${product.name}. ${sizeText}`, margin, productYPosition);
 
         const priceXPosition = 210 - margin;
         doc.text(
@@ -479,7 +483,10 @@ const CartPage = () => {
               <div className='individualproducts' key={index}>
                 <div className='productimagename'>
                   <img src={`http://localhost:5000${item.image}`} alt={item.name} />
-                  <p>{item.name}</p>
+                  <p>
+                    {item.name} <span style={{ fontWeight: "bold" }}>{item.selectedSize}</span>
+                  </p>
+
                 </div>
                 <p>PHP {item.price}</p>
                 <div className='quantity-control'>

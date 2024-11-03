@@ -76,7 +76,25 @@ const ProductsPage = () => {
         return;
       }
 
-      // Check if the product is a uniform and enforce limit of 2 uniforms
+      // Retrieve the current cart for this user
+      const existingCart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
+
+      // Check if the product (with the same size, if applicable) is already in the cart
+      const isProductInCart = existingCart.some(
+        (item) =>
+          item._id === selectedProduct._id &&
+          (!selectedProduct.hasSizes || item.selectedSize === selectedSize)
+      );
+
+      if (isProductInCart) {
+        setCartMessage('This item is already in your cart.');
+        setTimeout(() => {
+          setCartMessage('');
+        }, 2000);
+        return;
+      }
+
+      // Proceed to add the product to the cart
       const isUniform = selectedProduct.category !== 'merchandise';
       const newUniformCount = isUniform ? uniformCount + 1 : uniformCount;
 
@@ -91,27 +109,21 @@ const ProductsPage = () => {
         return;
       }
 
-      // Enforce total item limit of 5
       const newTotalItems = totalItemsInCart + 1;
       if (newTotalItems > 5) {
         setCartMessage('You can only add up to 5 items.');
         return;
       }
 
-      // Retrieve existing cart for this user
-      const existingCart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
-
-      // Update cart state and localStorage with new item
+      // Update the cart and localStorage with the new item
       const updatedCart = [...existingCart, cartItem];
       setCart(updatedCart);
-      localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart)); // Store cart uniquely for this user
+      localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
 
-
-
-      // Add the product to the cart
+      // Update the UI state
       setCartMessage('Added to cart!');
       setSelectedProduct(null);
-      setSelectedSize(null);
+      setSelectedSize();
       setQuantity(1);
       setTotalItemsInCart(newTotalItems);
       setUniformCount(newUniformCount);
@@ -122,6 +134,7 @@ const ProductsPage = () => {
     }
   };
 
+
   const handleProductClick = (product) => {
     setSelectedProduct(product);
     setSelectedSize(null); // Reset size for new product selection
@@ -131,7 +144,6 @@ const ProductsPage = () => {
   const handleCloseModal = () => {
     setSelectedProduct(null);
   };
-
   return (
     <div>
       <NavBar />
@@ -147,7 +159,7 @@ const ProductsPage = () => {
       <section>
         <div className="notice-section">
           <p>
-            
+
           </p>
         </div>
       </section>
