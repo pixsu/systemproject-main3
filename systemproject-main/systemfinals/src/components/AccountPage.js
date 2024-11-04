@@ -183,7 +183,7 @@ const AccountPage = () => {
         } catch (error) {
             console.error('Error changing password:', error);
         }
-    };
+    }; 
 
     const setSelectedCategory = (category) => {
         navigate('/products', { state: { selectedCategory: category } });
