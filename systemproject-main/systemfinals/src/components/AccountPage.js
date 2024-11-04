@@ -196,7 +196,7 @@ const AccountPage = () => {
         } catch (error) {
             console.error('Error changing password:', error);
         }
-    };
+    }; 
 
     // Function to navigate to the products page with a selected category
     const setSelectedCategory = (category) => {
