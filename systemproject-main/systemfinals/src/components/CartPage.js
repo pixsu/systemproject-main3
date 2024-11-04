@@ -423,10 +423,6 @@ const CartPage = () => {
     }
   };
 
-
-
-
-
   // function to check if the date is valid (not a Sunday and at least 10 days from today)
   // filters the dates to disable those with zero slots
   const isDateValid = (date) => {

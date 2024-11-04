@@ -13,58 +13,60 @@ import ContactSection from './ContactSection';
 import Slideshow from './Slideshow';
 
 const HomePage = () => {
-  // default products
+  // Default product list for featured products section
   const [products, setProducts] = useState([
-    { 
-      id: 7, 
-      name: 'Bulldogs Cap', 
-      price: 199, 
+    {
+      id: 7,
+      name: 'Bulldogs Cap',
+      price: 199,
       image: require('../imgs/merch/merch_nucap.png'),
-      selectedSize: '', 
-      category: 'merchandise', 
-      description: 'A trendy cap for Bulldogs fans.' 
+      selectedSize: '',
+      category: 'merchandise',
+      description: 'A trendy cap for Bulldogs fans.'
     },
-    { 
-      id: 8, 
-      name: 'NU Drawstring Bag', 
-      price: 149, 
+    {
+      id: 8,
+      name: 'NU Drawstring Bag',
+      price: 149,
       image: require('../imgs/merch/merch_drawstring.png'),
-      selectedSize: '', 
-      category: 'merchandise', 
-      description:  'A convenient drawstring bag for daily use.' 
+      selectedSize: '',
+      category: 'merchandise',
+      description: 'A convenient drawstring bag for daily use.'
     },
-    { 
-      id: 9, 
-      name: 'Bulldog Stuffed Toy', 
-      price: 299, 
+    {
+      id: 9,
+      name: 'Bulldog Stuffed Toy',
+      price: 299,
       image: require('../imgs/merch/merch_plushie.png'),
-      selectedSize: '', 
-      category: 'merchandise', 
-      description: 'A cute Bulldog plush toy for school spirit.' 
+      selectedSize: '',
+      category: 'merchandise',
+      description: 'A cute Bulldog plush toy for school spirit.'
     },
-    { 
-      id: 10, 
-      name: 'NU Tumbler', 
-      price: 399, 
+    {
+      id: 10,
+      name: 'NU Tumbler',
+      price: 399,
       image: require('../imgs/merch/merch_tumbler.png'),
-      selectedSize: '', 
-      category: 'merchandise', 
-      description: 'A durable tumbler for on-the-go drinks.' 
+      selectedSize: '',
+      category: 'merchandise',
+      description: 'A durable tumbler for on-the-go drinks.'
     }
   ]);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const whatsNewRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false); // Tracks visibility of the "What's New" section
+  const whatsNewRef = useRef(null); // Reference to "What's New" section for intersection observer
   const navigate = useNavigate();
 
+  // Navigate to products page
   const viewallproducts = () => {
     navigate('/products');
   };
 
+  // Intersection observer to reveal "What's New" section on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        setIsVisible(true);
+        setIsVisible(true); // Makes section visible when it enters the viewport
         observer.disconnect();
       }
     });
@@ -80,15 +82,16 @@ const HomePage = () => {
     };
   }, []);
 
+  // Sets selected category and navigates to products page with the category pre-selected
   const setSelectedCategory = (category) => {
     navigate('/products', { state: { selectedCategory: category } });
   };
 
   return (
     <div>
-      <NavBar />
-      
-      {/* top section, welcome */}
+      <NavBar /> {/* Navigation bar component */}
+
+      {/* Welcome section with call-to-action */}
       <section className="top-section">
         <div className="top-content">
           <h1>Wear your pride,</h1>
@@ -101,6 +104,7 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Notice section */}
       <section>
         <div className="notice-section">
           <p>
@@ -109,7 +113,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* website features section */}
+      {/* Features section with three main features */}
       <section className='fullfeature'>
         <div className='features'>
           <div className="feature">
@@ -144,9 +148,9 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* what's new section */}
+      {/* "What's New" section showcasing new products, revealed when scrolled into view */}
       <section className={`whatsnew ${isVisible ? 'visible' : ''}`} ref={whatsNewRef}>
-        <div className='wntext'> 
+        <div className='wntext'>
           <h1>What's new?</h1>
           <h3>NU Tumbler</h3>
           <p>Stay refreshed on the go with our sleek and stylish NU Tumbler! Made from durable, high-quality materials, this eco-friendly tumbler keeps your drinks hot or cold for hours. Show off your NU pride while enjoying your favorite beverages in style!</p>
@@ -158,14 +162,15 @@ const HomePage = () => {
         <img src={tumbler} alt="NU Tumbler" />
       </section>
 
+      {/* Featured Products section with clickable product cards */}
       <section className="ftrdproducts">
         <h1>Featured Products</h1>
 
         <div className="product-list">
           {products.map((product) => (
-            <div 
-              className="product-card" 
-              key={product.id} 
+            <div
+              className="product-card"
+              key={product.id}
               onClick={() => setSelectedCategory(product.category)}
             >
               <div className="product-image">
@@ -181,10 +186,10 @@ const HomePage = () => {
         <button onClick={viewallproducts} className="viewall">View All</button>
       </section>
 
-      {/* slideshow component */}
+      {/* Slideshow component for displaying images */}
       <Slideshow />
 
-      {/* nu moa yt video section */}
+      {/* YouTube video section promoting NU MOA */}
       <section className='videonumoa'>
         <div className="video-content-container">
           <iframe
@@ -206,9 +211,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* pass setSelectedCategory to ContactSection */}
+      {/* Contact section with category selection and feedback page */}
       <ContactSection setSelectedCategory={setSelectedCategory} />
       <FeedbackPage />
+
+      {/* Scroll-to-top button for easy navigation */}
       <ScrollToTopButton />
     </div>
   );

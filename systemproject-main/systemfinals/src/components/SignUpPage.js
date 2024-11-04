@@ -7,60 +7,72 @@ import './components_css/signuppagestyle.css';
 import logo3 from '../imgs/websitelogo2.png';
 
 const SignUpPage = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [loading, setLoading] = useState(false);
+  // Define state variables for form fields and UI behavior
+  const [passwordVisible, setPasswordVisible] = useState(false); // Toggles password visibility
+  const [selectedCourse, setSelectedCourse] = useState(""); // Stores the selected course
+  const [email, setEmail] = useState(""); // Stores the user's email
+  const [password, setPassword] = useState(""); // Stores the user's password
+  const [confirmPassword, setConfirmPassword] = useState(""); // Stores the password confirmation
+  const [firstName, setFirstName] = useState(""); // Stores the user's first name
+  const [lastName, setLastName] = useState(""); // Stores the user's last name
+  const [loading, setLoading] = useState(false); // Indicates if the signup process is loading
+  const [errorMessage, setErrorMessage] = useState(""); // Stores error messages for validation
 
+  // Toggles the visibility of the password input field
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  // Initialize navigation hook to redirect after signup
   const navigate = useNavigate();
 
+  // Handles the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear any previous error message
 
+    // Validate email format to ensure it ends with "@students.nu-moa.edu.ph"
     const emailPattern = /^[a-zA-Z0-9._%+-]+@students\.nu-moa\.edu\.ph$/;
     if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address ending with @students.nu-moa.edu.ph.");
+      setErrorMessage("Please enter a valid email address ending with @students.nu-moa.edu.ph.");
       return;
     }
 
+    // Validate that first and last names are no more than 10 characters
     if (firstName.length > 10 || lastName.length > 10) {
-      alert("First and Last names must be 10 characters or less.");
+      setErrorMessage("First and Last names must be 10 characters or less.");
       return;
     }
 
+    // Ensure password is at least 8 characters long
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      setErrorMessage("Password must be at least 8 characters long.");
       return;
     }
 
+    // Check if password contains at least one uppercase letter and one number
     const passwordUppercasePattern = /(?=.*[A-Z])(?=.*\d)/;
     if (!passwordUppercasePattern.test(password)) {
-      alert("Password must contain at least one uppercase letter and one number.");
+      setErrorMessage("Password must contain at least one uppercase letter and one number.");
       return;
     }
 
+    // Confirm that passwords match
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      setErrorMessage("Passwords do not match.");
       return;
     }
 
+    // Verify that a course has been selected
     if (!selectedCourse) {
-      alert("Please select your course.");
+      setErrorMessage("Please select your course.");
       return;
     }
 
     try {
-      setLoading(true);
+      setLoading(true); // Show loading spinner while waiting for response
 
-
+      // Send signup request to server
       const response = await axios.post('http://localhost:5000/api/auth/signup', {
         firstName,
         lastName,
@@ -69,33 +81,44 @@ const SignUpPage = () => {
         course: selectedCourse,
       });
 
+      // Redirect to login page if signup was successful
       if (response.status === 201) {
         navigate('/login');
       } else {
+        // Handle unexpected response status here (optional)
       }
     } catch (error) {
       console.error("Error during signup:", error);
     } finally {
-      completeSignup();
+      completeSignup(); // Complete signup process by hiding the loader and navigating
     }
   };
 
+  // Completes signup by stopping loading, clearing errors, and redirecting to login
   const completeSignup = () => {
     setTimeout(() => {
       setLoading(false);
       navigate('/login');
+      setErrorMessage(""); // Clear error message on completion
     }, 2000);
   };
 
   return (
     <section className='bgsec'>
-      {loading && <LoadingPopUp />} {/* show loading component when loading */}
+      {/* Show loading popup if loading is true */}
+      {loading && <LoadingPopUp />}
       <div className="signup-container">
+        {/* Display logo */}
         <img src={logo3} alt="NU MOA Logo" className="signup-logo" />
         <h2>Sign Up to continue</h2>
         <p>Please enter your school email address and password.</p>
 
+        {/* Display error message if it exists */}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+        {/* Signup form with input fields */}
         <form className="signup-form" onSubmit={handleSubmit}>
+          {/* First Name and Last Name input fields */}
           <div className="name-inputs">
             <div className="name-input-group">
               <input
@@ -119,6 +142,7 @@ const SignUpPage = () => {
             </div>
           </div>
 
+          {/* Email input field */}
           <div className="email-input-group">
             <i className="fas fa-envelope"></i>
             <input
@@ -130,6 +154,7 @@ const SignUpPage = () => {
             />
           </div>
 
+          {/* Password input field with toggle visibility */}
           <div className="password-input-group">
             <i className="fas fa-lock"></i>
             <input
@@ -148,6 +173,7 @@ const SignUpPage = () => {
             ></i>
           </div>
 
+          {/* Confirm Password input field */}
           <div className="confirmpassword-input-group">
             <i className="fas fa-lock"></i>
             <input
@@ -166,6 +192,7 @@ const SignUpPage = () => {
             ></i>
           </div>
 
+          {/* Course selection dropdown */}
           <div className="course-input-group">
             <select
               required
@@ -173,6 +200,7 @@ const SignUpPage = () => {
               onChange={(e) => setSelectedCourse(e.target.value)}
             >
               <option value="" disabled>Select Your Course</option>
+              {/* List of course options */}
               <option value="BS Architecture">BS Architecture</option>
               <option value="BS Financial Management">BS Financial Management</option>
               <option value="BS Information Technology - MWA">BS Information Technology - MWA</option>
@@ -186,10 +214,12 @@ const SignUpPage = () => {
             </select>
           </div>
 
+          {/* Signup button */}
           <button type="submit" className="signup-btn" disabled={loading}>
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
 
+          {/* Link to login page */}
           <p className="login-link">
             Already have an account? <a href="/login">Log In</a>
           </p>
